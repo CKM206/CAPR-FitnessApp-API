@@ -1,0 +1,26 @@
+{
+  "name": "fitnessapp-api",
+  "version": "0.0.1",
+  "description": "API for the Fitness App created for the CAPR Final Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CKM206/CAPR-FitnessApp-API.git"
+  },
+  "author": "Calvin May <calvinkylemay@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CKM206/CAPR-FitnessApp-API/issues"
+  },
+  "homepage": "https://github.com/CKM206/CAPR-FitnessApp-API#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.4",
+    "nodemon": "^2.0.15"
+  }
+}

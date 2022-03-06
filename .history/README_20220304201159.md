@@ -1,0 +1,1 @@
+This is an API for the Fitness App created for the CAPR Final Project
