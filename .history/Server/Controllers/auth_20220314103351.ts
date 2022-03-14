@@ -14,12 +14,12 @@
  * Initial Controller/Express Configuration
  */
  import { Request, Response, NextFunction } from 'express';
- import User from '../Models/User';
+ import UserModel, { User } from '../Models/User';
 
  // Imports | 3rd Party
  import mongoose from 'mongoose';
  import jwt from 'jsonwebtoken';
- //const User = mongoose.model('User');
+ const User = mongoose.model('User');
  
  export async function ProcessSignUp(req:Request, res:Response, next:NextFunction)
  {
@@ -51,7 +51,7 @@
          }
  
          // Await a response from the database, ensure that the function now uses async
-         const user = await User.findOne({ email });
+         const user = await User.findOne({ email }) : typeof User;
  
          // Check for no user found
          if (!user) {

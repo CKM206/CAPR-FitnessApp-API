@@ -14,12 +14,12 @@
  * Initial Controller/Express Configuration
  */
  import { Request, Response, NextFunction } from 'express';
- import User from '../Models/User';
+ //import UserModel, { User } from '../Models/User';
 
  // Imports | 3rd Party
  import mongoose from 'mongoose';
  import jwt from 'jsonwebtoken';
- //const User = mongoose.model('User');
+ const User = mongoose.model('User');
  
  export async function ProcessSignUp(req:Request, res:Response, next:NextFunction)
  {
@@ -60,7 +60,7 @@
  
          try {
              console.log('Got Here!');
-         await user.comparePassword(password);
+         await user.schema.methods.comparePassword(password);
              const token = jwt.sign({ userId: user._id }, process.env.SECRET);
              return res.send({ token });
          }

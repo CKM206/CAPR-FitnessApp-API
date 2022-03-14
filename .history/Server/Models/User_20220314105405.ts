@@ -1,20 +1,14 @@
 import { Document, Model, model, Types, Schema, Query } from "mongoose"
-import bcrypt from 'bcrypt';   // Import bcrypt so we can hash/salt user passwords
+const bcrypt = require('bcrypt');   // Import bcrypt so we can hash/salt user passwords
 
 // User Document Interface
 interface IUserDocument extends Document {
-    email: string,
-    password: string,
+    email: String,
+    password: String
 }
 
-// Instance Methods are Included here
 export interface IUser extends IUserDocument {
     comparePassword(password: String): void;
-}
-
-
-export interface IUserModel extends Model<IUser> {
-
 }
 
 
@@ -36,7 +30,7 @@ export const UserSchema: Schema = new Schema
 
 
 // Use a named function here because we want 'this' to refer to a user instance and not the User class
-UserSchema.pre('save', function(next: Function) {
+UserSchema.pre('save', function(next: any) {
     // Asssign the user instance
     const user = this;
     
@@ -47,14 +41,14 @@ UserSchema.pre('save', function(next: Function) {
     }
     // Otherwise
     // Generate the salt for the hash
-    bcrypt.genSalt(10, (err: Error, salt: string) => {
+    bcrypt.genSalt(10, (err: any, salt: any) => {
         // Check for an error
         if (err) {
             return next(err);
         }
         // otherwise
         // Generate the hash using the password with the salt
-        bcrypt.hash(user.password, salt, (err: Error, hash: string) => {
+        bcrypt.hash(user.password, salt, (err: any, hash: any) => {
             // Check for an error
             if (err) {
                 return next(err);
@@ -69,14 +63,14 @@ UserSchema.pre('save', function(next: Function) {
 
 
 // Automate Password Checking Process (This is a function we can use to compare provided passwords)
-UserSchema.method('comparePassword', function (candidatePassword: string) {
+UserSchema.method('comparePassword', function (candidatePassword: String): Promise<T> {
     // Get reference to the user
     const user = this;
     
     // Create a promise so we can using async/await when comparing passwords
     //-callback functions: Resolve indicates success, reject indicates failure
     return new Promise((resolve, reject) => {
-        bcrypt.compare(candidatePassword, user.password, (err: Error, isMatch: boolean) => {
+        bcrypt.compare(candidatePassword, user.password, (err: any, isMatch: any) => {
             // If there was an error return reject() with the error
             if (err) {
                 return reject(err);
@@ -94,5 +88,4 @@ UserSchema.method('comparePassword', function (candidatePassword: string) {
 });
 
 // Create the User Model
-export const User: IUserModel = model<IUser, IUserModel>('User', UserSchema);
-export default User;
+export default model<UserDocument, UserModel>('User', UserSchema);

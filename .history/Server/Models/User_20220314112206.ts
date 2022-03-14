@@ -19,7 +19,7 @@ export interface IUserModel extends Model<IUser> {
 
 
 // Setup a User Schema to match the objects within the mongoDB Users Collection
-export const UserSchema: Schema = new Schema
+export const PeopleSchema: Schema = new Schema
 ({
     // Attributes of a user
     email: {
@@ -36,7 +36,7 @@ export const UserSchema: Schema = new Schema
 
 
 // Use a named function here because we want 'this' to refer to a user instance and not the User class
-UserSchema.pre('save', function(next: Function) {
+PeopleSchema.pre('save', function(next: any) {
     // Asssign the user instance
     const user = this;
     
@@ -69,7 +69,7 @@ UserSchema.pre('save', function(next: Function) {
 
 
 // Automate Password Checking Process (This is a function we can use to compare provided passwords)
-UserSchema.method('comparePassword', function (candidatePassword: string) {
+PeopleSchema.method('comparePassword', function (candidatePassword: string) {
     // Get reference to the user
     const user = this;
     
@@ -94,5 +94,5 @@ UserSchema.method('comparePassword', function (candidatePassword: string) {
 });
 
 // Create the User Model
-export const User: IUserModel = model<IUser, IUserModel>('User', UserSchema);
+export const User: IUserModel = model<IUser, IUserModel>('User', PeopleSchema);
 export default User;

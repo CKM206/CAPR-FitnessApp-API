@@ -14,7 +14,7 @@
  * Initial Controller/Express Configuration
  */
  import { Request, Response, NextFunction } from 'express';
- import User from '../Models/User';
+ import People from '../Models/User';
 
  // Imports | 3rd Party
  import mongoose from 'mongoose';
@@ -27,7 +27,7 @@
          const { email, password} = req.body // Deconstruct the email and password send by the request
          // Use Try catch when working with databases
          try {
-             const newUser = new User({email, password});   // Use the email and password to create a new User
+             const newUser = new People({email, password});   // Use the email and password to create a new User
              // Save the user to the database
              await newUser.save();    // This is asynchronous! must use async (in the function) and await
              
@@ -51,7 +51,7 @@
          }
  
          // Await a response from the database, ensure that the function now uses async
-         const user = await User.findOne({ email });
+         const user = await People.findOne({ email });
  
          // Check for no user found
          if (!user) {

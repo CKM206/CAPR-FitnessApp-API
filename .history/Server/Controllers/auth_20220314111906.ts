@@ -14,7 +14,7 @@
  * Initial Controller/Express Configuration
  */
  import { Request, Response, NextFunction } from 'express';
- import User from '../Models/User';
+ import { People as User } from '../Models/User';
 
  // Imports | 3rd Party
  import mongoose from 'mongoose';

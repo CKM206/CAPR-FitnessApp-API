@@ -36,7 +36,7 @@ export const UserSchema: Schema = new Schema
 
 
 // Use a named function here because we want 'this' to refer to a user instance and not the User class
-UserSchema.pre('save', function(next: Function) {
+UserSchema.pre('save', function(next: any) {
     // Asssign the user instance
     const user = this;
     
@@ -94,5 +94,5 @@ UserSchema.method('comparePassword', function (candidatePassword: string) {
 });
 
 // Create the User Model
-export const User: IUserModel = model<IUser, IUserModel>('User', UserSchema);
+export const User: IUserModel = model<IUser, IUserModel>('User', UserSchema, 'People');
 export default User;

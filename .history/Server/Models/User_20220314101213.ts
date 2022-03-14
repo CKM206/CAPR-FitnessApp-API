@@ -1,25 +1,15 @@
-import { Document, Model, model, Types, Schema, Query } from "mongoose"
-import bcrypt from 'bcrypt';   // Import bcrypt so we can hash/salt user passwords
+import { Schema, model, connect } from 'mongoose';
+const bcrypt = require('bcrypt');   // Import bcrypt so we can hash/salt user passwords
 
-// User Document Interface
-interface IUserDocument extends Document {
+// Setup Interface
+interface User {
     email: string,
     password: string,
 }
 
-// Instance Methods are Included here
-export interface IUser extends IUserDocument {
-    comparePassword(password: String): void;
-}
-
-
-export interface IUserModel extends Model<IUser> {
-
-}
-
 
 // Setup a User Schema to match the objects within the mongoDB Users Collection
-export const UserSchema: Schema = new Schema
+const userSchema = new Schema<User>
 ({
     // Attributes of a user
     email: {
@@ -33,13 +23,15 @@ export const UserSchema: Schema = new Schema
     }
 });
 
+// Create the User Model
+const UserModel = model<User>('User', userSchema);
 
 
 // Use a named function here because we want 'this' to refer to a user instance and not the User class
-UserSchema.pre('save', function(next: Function) {
+userSchema.pre('save', function(next: any) {
     // Asssign the user instance
     const user = this;
-    
+
     // Check to see if the user has modified their password
     if (!user.isModified('password')) {
         // if not just return, dont need to continue
@@ -47,14 +39,14 @@ UserSchema.pre('save', function(next: Function) {
     }
     // Otherwise
     // Generate the salt for the hash
-    bcrypt.genSalt(10, (err: Error, salt: string) => {
+    bcrypt.genSalt(10, (err: any, salt: any) => {
         // Check for an error
         if (err) {
             return next(err);
         }
         // otherwise
         // Generate the hash using the password with the salt
-        bcrypt.hash(user.password, salt, (err: Error, hash: string) => {
+        bcrypt.hash(user.password, salt, (err: any, hash: any) => {
             // Check for an error
             if (err) {
                 return next(err);
@@ -69,14 +61,14 @@ UserSchema.pre('save', function(next: Function) {
 
 
 // Automate Password Checking Process (This is a function we can use to compare provided passwords)
-UserSchema.method('comparePassword', function (candidatePassword: string) {
+userSchema.methods.comparePassword = function(candidatePassword: String) {
     // Get reference to the user
     const user = this;
-    
+
     // Create a promise so we can using async/await when comparing passwords
     //-callback functions: Resolve indicates success, reject indicates failure
     return new Promise((resolve, reject) => {
-        bcrypt.compare(candidatePassword, user.password, (err: Error, isMatch: boolean) => {
+        bcrypt.compare(candidatePassword, user.password, (err: any, isMatch: any) => {
             // If there was an error return reject() with the error
             if (err) {
                 return reject(err);
@@ -91,8 +83,8 @@ UserSchema.method('comparePassword', function (candidatePassword: string) {
             resolve(true);
         });
     });
-});
+};
 
-// Create the User Model
-export const User: IUserModel = model<IUser, IUserModel>('User', UserSchema);
-export default User;
+// // Associate the User Model with Mongoose
+// // Model name is 'User', associated with the userSchema
+//mongoose.model('User', userSchema);
