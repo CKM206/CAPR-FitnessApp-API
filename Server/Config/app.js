@@ -30,7 +30,8 @@ const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const morgan_1 = __importDefault(require("morgan"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const index_1 = __importDefault(require("../Routes/index"));
+const requireAuth = require('../middlewares/requireAuth');
+const auth_1 = __importDefault(require("../Routes/auth"));
 const app = (0, express_1.default)();
 app.set('views', path_1.default.join(__dirname, '../Views/'));
 app.use((0, morgan_1.default)('dev'));
@@ -46,5 +47,5 @@ db.on('error', console.error.bind(console, 'Connect Error:'));
 db.once('open', function () {
     console.log(`Connected to MongoDB at: ${DBConfig.Host}`);
 });
-app.use('/', index_1.default);
+app.use('/', requireAuth, auth_1.default);
 //# sourceMappingURL=app.js.map
