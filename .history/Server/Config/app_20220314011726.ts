@@ -7,8 +7,6 @@
  *  Description: This file is responsible for App configuration, this files connectes various
  *              parts of the rest of th project to ensure that the API works as intended.
  */
-// Require Models
- require('../Models/User');
 // Import Express
 import express from 'express';          // Express!
 
@@ -18,7 +16,7 @@ import path from 'path';                // Project Pathing
 import logger from 'morgan';            // Logging
 import mongoose from 'mongoose';        // DB functionality
 import jwt from 'jsonwebtoken';
-const requireAuth = require('../middlewares/requireAuth');
+//const requireAuth = require('../middlewares/requireAuth');
 
 // Routing Imports
 import indexRouter from '../Routes/index';  // Import the Index Router
@@ -48,5 +46,5 @@ db.once('open', function() {
 });
 
 // Routing Configuration
-app.use('/', requireAuth, indexRouter);
+app.use('/', indexRouter);
 

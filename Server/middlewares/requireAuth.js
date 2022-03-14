@@ -8,17 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const User = mongoose_1.default.model('User');
 module.exports = (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
         return res.status(401).send({ error: 'You must be logged in.' });
     }
     const token = authorization.replace('Bearer ', '');
-    jwt.verify(token, process.env.SECRET, (err, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    jsonwebtoken_1.default.verify(token, process.env.SECRET, (err, payload) => __awaiter(void 0, void 0, void 0, function* () {
         if (err) {
             return res.status(401).send({ error: 'You must be logged in.' });
         }

@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require('../Models/User');
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
 const morgan_1 = __importDefault(require("morgan"));
@@ -47,5 +48,5 @@ db.on('error', console.error.bind(console, 'Connect Error:'));
 db.once('open', function () {
     console.log(`Connected to MongoDB at: ${DBConfig.Host}`);
 });
-app.use('/', index_1.default);
+app.use('/', requireAuth, index_1.default);
 //# sourceMappingURL=app.js.map
