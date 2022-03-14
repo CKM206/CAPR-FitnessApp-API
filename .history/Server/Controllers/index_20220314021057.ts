@@ -26,7 +26,6 @@ const User = mongoose.model('User');
 //- Process Home Request
 export function ProcessHome(req:Request, res:Response, next:NextFunction): void
 {
-    console.log('Got Here');
     res.send('You are at the Home Route!');
 }
 

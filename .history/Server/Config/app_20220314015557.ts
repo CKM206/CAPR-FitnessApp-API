@@ -24,7 +24,7 @@ const requireAuth = require('../middlewares/requireAuth');
 
 // Routing Imports
 import indexRouter from '../Routes/index';  // Import the Index Router
-import authRouter from '../Routes/auth';
+//import authRouter from '../Routes/auth';
 
 
 // App Configuration
@@ -50,6 +50,6 @@ db.once('open', function() {
 });
 
 // Routing Configuration
-app.use(authRouter);
 app.use('/', requireAuth, indexRouter);
+app.use('/', requireAuth, authRouter);
 

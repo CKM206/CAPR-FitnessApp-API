@@ -79,4 +79,15 @@ userSchema.methods.comparePassword = function(candidatePassword: String) {
 
 // // Associate the User Model with Mongoose
 // // Model name is 'User', associated with the userSchema
-mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+declare global
+{
+    export type UserDocument = mongoose.Document &
+    {
+        email: String,
+        password: String
+    }
+}
+
+export default User;

@@ -50,6 +50,6 @@ db.once('open', function() {
 });
 
 // Routing Configuration
-app.use(authRouter);
 app.use('/', requireAuth, indexRouter);
+app.use('/', requireAuth, authRouter);
 

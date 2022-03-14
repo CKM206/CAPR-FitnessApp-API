@@ -33,6 +33,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const requireAuth = require('../middlewares/requireAuth');
 const index_1 = __importDefault(require("../Routes/index"));
+const auth_1 = __importDefault(require("../Routes/auth"));
 const app = (0, express_1.default)();
 app.set('views', path_1.default.join(__dirname, '../Views/'));
 app.use((0, morgan_1.default)('dev'));
@@ -48,5 +49,6 @@ db.on('error', console.error.bind(console, 'Connect Error:'));
 db.once('open', function () {
     console.log(`Connected to MongoDB at: ${DBConfig.Host}`);
 });
+app.use(auth_1.default);
 app.use('/', requireAuth, index_1.default);
 //# sourceMappingURL=app.js.map

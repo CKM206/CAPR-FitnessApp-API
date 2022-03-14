@@ -16,9 +16,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 // Imports | 3rd Party
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-const User = mongoose.model('User');
+
 
 /**
  * Processing Functions
@@ -26,7 +24,16 @@ const User = mongoose.model('User');
 //- Process Home Request
 export function ProcessHome(req:Request, res:Response, next:NextFunction): void
 {
-    console.log('Got Here');
+    res.send('You are at the Home Route!');
+}
+
+export function ProcessSignIn(req:Request, res:Response, next:NextFunction): void
+{
+    res.send('You are at the Home Route!');
+}
+
+export function ProcessSignUp(req:Request, res:Response, next:NextFunction): void
+{
     res.send('You are at the Home Route!');
 }
 
