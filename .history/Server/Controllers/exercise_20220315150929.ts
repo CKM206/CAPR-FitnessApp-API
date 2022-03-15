@@ -83,7 +83,9 @@
 
     try {
         const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
-        
+
+        console.log(exercise);
+        return res.send('Got Here');
         if (!exercise)
         {
             return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
@@ -95,10 +97,9 @@
             return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
         }  
            
-       
-        const newExercise = await Exercise.findOneAndReplace({_id: req.params.id }, req.body, { returnDocument: 'after' });
-        //Exercise.
-        return res.send(newExercise);
+        const newExercise = new Exercise(req.body);
+
+        await Exercise.findByIdAndUpdate(req.params.id, newExercise);
     }
     catch (err) {
         return res.status(422).send(err.message);

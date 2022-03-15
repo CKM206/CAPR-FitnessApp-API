@@ -13,7 +13,6 @@ export interface IExercise
     isDefault: boolean,
     userId: Types.ObjectId,
 };
-
 export interface IExerciseModel extends Model<IExercise> 
 {
 

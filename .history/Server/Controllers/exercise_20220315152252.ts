@@ -96,7 +96,7 @@
         }  
            
        
-        const newExercise = await Exercise.findOneAndReplace({_id: req.params.id }, req.body, { returnDocument: 'after' });
+        const newExercise = await Exercise.findOneAndReplace({_id: req.params.id }, req.body, [options.returnDocument='before']);
         //Exercise.
         return res.send(newExercise);
     }

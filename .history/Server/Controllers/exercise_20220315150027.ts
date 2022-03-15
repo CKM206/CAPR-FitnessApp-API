@@ -79,30 +79,7 @@
 
  export async function UpdateExercise(req: Request, res:Response, next:NextFunction): Promise<Response>
  {
-    const { name, exerciseType, setType, isDefault } = req.body;
-
-    try {
-        const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
-        
-        if (!exercise)
-        {
-            return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
-        }
-
-        // Check if all Required Properties
-        if (!name || !exerciseType || !setType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
-        {
-            return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
-        }  
-           
-       
-        const newExercise = await Exercise.findOneAndReplace({_id: req.params.id }, req.body, { returnDocument: 'after' });
-        //Exercise.
-        return res.send(newExercise);
-    }
-    catch (err) {
-        return res.status(422).send(err.message);
-    }
+     return res.send('Made it to the Update Exercise Method');
  };
 
 

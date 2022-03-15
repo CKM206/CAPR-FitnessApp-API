@@ -28,7 +28,18 @@ function GetExercises(req, res, next) {
 exports.GetExercises = GetExercises;
 ;
 function GetExercise(req, res, next) {
-    return res.send('Made it to the Get 1 Exercise Method');
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const exercise = yield Exercise_1.default.findById(req.params.id);
+            if (!exercise) {
+                return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
+            }
+            return res.send(exercise);
+        }
+        catch (err) {
+            return res.status(422).send(err.message);
+        }
+    });
 }
 exports.GetExercise = GetExercise;
 ;
@@ -41,7 +52,7 @@ function NewExercise(req, res, next) {
             }
             const newExercise = new Exercise_1.default(req.body);
             yield newExercise.save();
-            res.send({ newExercise });
+            res.send(newExercise);
         }
         catch (err) {
             return res.status(422).send(err.message);
@@ -52,13 +63,39 @@ exports.NewExercise = NewExercise;
 ;
 function UpdateExercise(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.send('Made it to the Update Exercise Method');
+        const { name, exerciseType, setType, isDefault } = req.body;
+        try {
+            const exercise = yield Exercise_1.default.findById(req.params.id);
+            if (!exercise) {
+                return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
+            }
+            if (!name || !exerciseType || !setType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
+                return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
+            }
+            const newExercise = yield Exercise_1.default.findOneAndReplace({ _id: req.params.id }, req.body, { returnDocument: 'after' });
+            return res.send(newExercise);
+        }
+        catch (err) {
+            return res.status(422).send(err.message);
+        }
     });
 }
 exports.UpdateExercise = UpdateExercise;
 ;
 function DeleteExercise(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const exercise = yield Exercise_1.default.findById(req.params.id);
+            console.log(exercise.id);
+            if (!exercise) {
+                return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
+            }
+            yield Exercise_1.default.findByIdAndDelete(exercise.id);
+            return res.send(exercise);
+        }
+        catch (err) {
+            return res.status(422).send(err.message);
+        }
         return res.send('Made it to the Delete Exercise Method');
     });
 }

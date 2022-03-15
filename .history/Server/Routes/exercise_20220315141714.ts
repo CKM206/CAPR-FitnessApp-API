@@ -42,4 +42,4 @@
   /**
   * DELETE Requests
   */
-   router.delete('/exercise/:id', DeleteExercise);            // Delete a single Exercise
+   router.delete('/exercise/:exerciseId', DeleteExercise);            // Delete a single Exercise

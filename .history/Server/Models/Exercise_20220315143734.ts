@@ -14,12 +14,7 @@ export interface IExercise
     userId: Types.ObjectId,
 };
 
-export interface IExerciseModel extends Model<IExercise> 
-{
-
-}
-
-const ExerciseSchema: Schema<IExercise> = new Schema
+export const ExerciseSchema: Schema<IExercise> = new Schema
 ({
     name: {
         type: String,
@@ -57,5 +52,5 @@ const ExerciseSchema: Schema<IExercise> = new Schema
 });
 
 // Create the Exercise Model
-const Exercise = model<IExercise, IExerciseModel>('Exercise', ExerciseSchema);
+const Exercise = model<IExercise>('Exercise', ExerciseSchema);
 export default Exercise;

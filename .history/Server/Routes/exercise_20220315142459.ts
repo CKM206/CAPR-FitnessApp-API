@@ -24,7 +24,7 @@
   */
 
  router.get('/', GetExercises);        // Get all Exercises
- router.get('/exercise/:id', GetExercise);   // Get A single Exercise
+ router.get('/exercise/:?id', GetExercise);   // Get A single Exercise
 
   /**
   * POST Requests
@@ -42,4 +42,4 @@
   /**
   * DELETE Requests
   */
-   router.delete('/exercise/:id', DeleteExercise);            // Delete a single Exercise
+   router.delete('/exercise/:exerciseId', DeleteExercise);            // Delete a single Exercise

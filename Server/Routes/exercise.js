@@ -11,5 +11,5 @@ router.get('/', exercise_1.GetExercises);
 router.get('/exercise/:id', exercise_1.GetExercise);
 router.post('/', exercise_1.NewExercise);
 router.put('/exercise/:id', exercise_1.UpdateExercise);
-router.delete('/exercise/:exerciseId', exercise_1.DeleteExercise);
+router.delete('/exercise/:id', exercise_1.DeleteExercise);
 //# sourceMappingURL=exercise.js.map

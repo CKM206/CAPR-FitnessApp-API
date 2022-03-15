@@ -95,9 +95,11 @@
             return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
         }  
            
-       
-        const newExercise = await Exercise.findOneAndReplace({_id: req.params.id }, req.body, { returnDocument: 'after' });
-        //Exercise.
+        const newExercise = new Exercise(req.body);
+
+
+        await Exercise.findByIdAndUpdate(req.params.id, newExercise);
+
         return res.send(newExercise);
     }
     catch (err) {

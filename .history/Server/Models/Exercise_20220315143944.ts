@@ -14,10 +14,6 @@ export interface IExercise
     userId: Types.ObjectId,
 };
 
-export interface IExerciseModel extends Model<IExercise> 
-{
-
-}
 
 const ExerciseSchema: Schema<IExercise> = new Schema
 ({
