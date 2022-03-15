@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProcessSignIn = exports.ProcessSignUp = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const User = mongoose_1.default.model('User');
+const User_1 = __importDefault(require("../Models/User"));
+;
 function ProcessSignUp(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const { email, password } = req.body;
         try {
-            const newUser = new User({ email, password });
+            const newUser = new User_1.default({ email, password });
             yield newUser.save();
             const token = jsonwebtoken_1.default.sign({ userId: newUser._id }, process.env.SECRET);
             res.send({ token });
@@ -37,7 +37,7 @@ function ProcessSignIn(req, res, next) {
         if (!email || !password) {
             return res.status(422).send({ error: 'Must provide an email and password' });
         }
-        const user = yield User.findOne({ email });
+        const user = yield User_1.default.findOne({ email });
         if (!user) {
             return res.status(404).send({ error: 'Invalid password or email' });
         }

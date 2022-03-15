@@ -13,8 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const mongoose_1 = __importDefault(require("mongoose"));
-const User = mongoose_1.default.model('User');
+const User_1 = __importDefault(require("../Models/User"));
 module.exports = (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
@@ -26,7 +25,7 @@ module.exports = (req, res, next) => {
             return res.status(401).send({ error: 'You must be logged in.' });
         }
         const { userId } = payload;
-        const user = yield User.findById(userId);
+        const user = yield User_1.default.findById(userId);
         req.user = user;
         next();
     }));

@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const bcrypt = require('bcrypt');
-const Schema = mongoose_1.default.Schema;
-const userSchema = new Schema({
+exports.UserSchema = void 0;
+const mongoose_1 = require("mongoose");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+exports.UserSchema = new mongoose_1.Schema({
     email: {
         type: String,
         unique: true,
@@ -17,16 +17,16 @@ const userSchema = new Schema({
         required: true,
     }
 });
-userSchema.pre('save', function (next) {
+exports.UserSchema.pre('save', function (next) {
     const user = this;
     if (!user.isModified('password')) {
         return next();
     }
-    bcrypt.genSalt(10, (err, salt) => {
+    bcrypt_1.default.genSalt(10, (err, salt) => {
         if (err) {
             return next(err);
         }
-        bcrypt.hash(user.password, salt, (err, hash) => {
+        bcrypt_1.default.hash(user.password, salt, (err, hash) => {
             if (err) {
                 return next(err);
             }
@@ -35,10 +35,10 @@ userSchema.pre('save', function (next) {
         });
     });
 });
-userSchema.methods.comparePassword = function (candidatePassword) {
+exports.UserSchema.method('comparePassword', function (candidatePassword) {
     const user = this;
     return new Promise((resolve, reject) => {
-        bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
+        bcrypt_1.default.compare(candidatePassword, user.password, (err, isMatch) => {
             if (err) {
                 return reject(err);
             }
@@ -48,6 +48,7 @@ userSchema.methods.comparePassword = function (candidatePassword) {
             resolve(true);
         });
     });
-};
-mongoose_1.default.model('User', userSchema);
+});
+const User = (0, mongoose_1.model)('User', exports.UserSchema);
+exports.default = User;
 //# sourceMappingURL=User.js.map
