@@ -45,10 +45,10 @@ exports.GetExercise = GetExercise;
 ;
 function NewExercise(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, exerciseType, setType, isDefault } = req.body;
+        const { name, exerciseType, isDefault } = req.body;
         try {
-            if (!name || !exerciseType || !setType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
-                return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
+            if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
+                return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
             }
             const newExercise = new Exercise_1.default(req.body);
             yield newExercise.save();
@@ -63,13 +63,14 @@ exports.NewExercise = NewExercise;
 ;
 function UpdateExercise(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, exerciseType, setType, isDefault } = req.body;
+        const { name, exerciseType, isDefault } = req.body;
+        console.log("Hello");
         try {
             const exercise = yield Exercise_1.default.findById(req.params.id);
             if (!exercise) {
                 return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
             }
-            if (!name || !exerciseType || !setType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
+            if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
                 return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
             }
             const newExercise = yield Exercise_1.default.findOneAndReplace({ _id: req.params.id }, req.body, { returnDocument: 'after' });

@@ -58,8 +58,6 @@
  {
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
-
-     console.log(req.body);
      
      try {
         // Check if all Required Properties

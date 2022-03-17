@@ -58,9 +58,7 @@
  {
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
-
-     console.log(req.body);
-     
+     console.log(req.body)
      try {
         // Check if all Required Properties
         if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
@@ -82,7 +80,7 @@
  export async function UpdateExercise(req: Request, res:Response, next:NextFunction): Promise<Response>
  {
     const { name, exerciseType, isDefault } = req.body;
-    console.log("Hello");
+
     try {
         const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
         

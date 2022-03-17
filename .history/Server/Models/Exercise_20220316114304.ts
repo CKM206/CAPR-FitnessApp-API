@@ -5,7 +5,7 @@ export interface IExercise
 {
     name: string,
     exerciseType: string,
-    muscles: Types.Array<string>,
+    muscles: [string],
     force: string,
     equipment: string,
     isDefault: boolean,

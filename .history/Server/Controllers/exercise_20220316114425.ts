@@ -58,14 +58,12 @@
  {
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
-
-     console.log(req.body);
-     
+    
      try {
         // Check if all Required Properties
         if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
         {
-            return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
+            return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
         }     
 
         const newExercise = new Exercise(req.body);
@@ -82,7 +80,7 @@
  export async function UpdateExercise(req: Request, res:Response, next:NextFunction): Promise<Response>
  {
     const { name, exerciseType, isDefault } = req.body;
-    console.log("Hello");
+
     try {
         const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
         

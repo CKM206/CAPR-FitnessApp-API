@@ -58,25 +58,23 @@
  {
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
+     console.log("Hello");
+    //  try {
+    //     // Check if all Required Properties
+    //     if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
+    //     {
+    //         return res.status(422).send({ error: 'Important Exercise Properties Missing!', body: req.body });
+    //     }     
 
-     console.log(req.body);
-     
-     try {
-        // Check if all Required Properties
-        if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
-        {
-            return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
-        }     
+    //     const newExercise = new Exercise(req.body);
 
-        const newExercise = new Exercise(req.body);
-
-        await newExercise.save();
-        res.send(newExercise);
+    //     await newExercise.save();
+    //     res.send(newExercise);
         
-    }
-    catch (err) {
-        return res.status(422).send(err.message);
-    }
+    // }
+    // catch (err) {
+    //     return res.status(422).send(err.message);
+    // }
  };
 
  export async function UpdateExercise(req: Request, res:Response, next:NextFunction): Promise<Response>
@@ -94,7 +92,7 @@
         // Check if all Required Properties
         if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
         {
-            return res.status(422).send({ error: 'Import Exercise Properties Missing!' });
+            return res.status(422).send({ error: 'Import sExercise Properties Missing!' });
         }  
            
        

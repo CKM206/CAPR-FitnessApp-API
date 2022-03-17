@@ -11,21 +11,14 @@ const ExerciseSchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
-    classification: {
-        type: String,
-    },
-    primaryMuscleGroup: {
-        type: String,
+    muscles: {
+        type: [String],
     },
     force: {
         type: String,
     },
     equipment: {
         type: String,
-    },
-    setType: {
-        type: String,
-        required: true
     },
     isDefault: {
         type: Boolean,

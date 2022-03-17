@@ -58,14 +58,12 @@
  {
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
-
-     console.log(req.body);
-     
+     console.log("Hello");
      try {
         // Check if all Required Properties
         if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
         {
-            return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
+            return res.status(422).send({ error: 'Important Exercise Properties Missing!', body: req.body });
         }     
 
         const newExercise = new Exercise(req.body);
