@@ -40,6 +40,7 @@
     try {
 
         const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
+        console.log("Hello!");
         if (!exercise)
         {
             return res.status(404).send({ error: 'Couldn\'t find an Exercise with that Id' });
@@ -58,7 +59,7 @@
      //console.log(req.body);
      const { name, exerciseType, isDefault } = req.body;
      
-     //console.log(req.body);
+     console
      try {
         // Check if all Required Properties
         if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
