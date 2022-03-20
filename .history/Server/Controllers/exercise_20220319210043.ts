@@ -26,8 +26,8 @@ import Exercise from '../Models/Exercise';
  export async function GetExercises(req:Request, res:Response, next:NextFunction): Promise<Response>
  {
 
-     const userId = req.user.id;
-     console.log(userId);
+     const { userId } = req.user.id;
+
     try {
         const exercises = await Exercise.find({ $or: [{isDefault: true}, {userId: userId}]  });
         return res.send(exercises);
@@ -74,7 +74,7 @@ import Exercise from '../Models/Exercise';
 
         console.log(newExercise);
 
-        await newExercise.save();
+        //await newExercise.save();
         res.send(newExercise);
         
     }

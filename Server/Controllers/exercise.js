@@ -16,8 +16,10 @@ exports.DeleteExercise = exports.UpdateExercise = exports.NewExercise = exports.
 const Exercise_1 = __importDefault(require("../Models/Exercise"));
 function GetExercises(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        const userId = req.user.id;
+        console.log(userId);
         try {
-            const exercises = yield Exercise_1.default.find();
+            const exercises = yield Exercise_1.default.find({ $or: [{ isDefault: true }, { userId: userId }] });
             return res.send(exercises);
         }
         catch (err) {
@@ -45,12 +47,16 @@ exports.GetExercise = GetExercise;
 ;
 function NewExercise(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, exerciseType, isDefault } = req.body;
+        const { name, exerciseType, muscles, force, equipment } = req.body;
+        const userId = req.user.id;
+        const isDefault = false;
+        console.log(userId);
         try {
-            if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null) {
+            if (!name || !exerciseType || !muscles || !force || !equipment) {
                 return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
             }
-            const newExercise = new Exercise_1.default(req.body);
+            const newExercise = new Exercise_1.default({ name, exerciseType, muscles, force, equipment, isDefault, userId: userId });
+            console.log(newExercise);
             yield newExercise.save();
             res.send(newExercise);
         }

@@ -13,12 +13,15 @@ const ExerciseSchema = new mongoose_1.Schema({
     },
     muscles: {
         type: [String],
+        required: true
     },
     force: {
         type: String,
+        required: true
     },
     equipment: {
         type: String,
+        required: true
     },
     isDefault: {
         type: Boolean,

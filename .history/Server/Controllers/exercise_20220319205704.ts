@@ -26,8 +26,8 @@ import Exercise from '../Models/Exercise';
  export async function GetExercises(req:Request, res:Response, next:NextFunction): Promise<Response>
  {
 
-     const userId = req.user.id;
-     console.log(userId);
+     const { userId } = req.user.id;
+
     try {
         const exercises = await Exercise.find({ $or: [{isDefault: true}, {userId: userId}]  });
         return res.send(exercises);
@@ -60,9 +60,9 @@ import Exercise from '../Models/Exercise';
      //console.log(req.body);
      //console.log(req.body);
      const { name, exerciseType, muscles, force, equipment } = req.body;
-     const userId = req.user.id;
+     const user = req.user.id;
      const isDefault = false;
-     console.log(userId);
+     //console.log(name);
      try {
         // Check if all Required Properties
         if (!name || !exerciseType || !muscles || !force || !equipment)
@@ -70,7 +70,7 @@ import Exercise from '../Models/Exercise';
             return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
         }     
 
-        const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
+        const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, user});
 
         console.log(newExercise);
 

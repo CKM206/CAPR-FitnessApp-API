@@ -14,10 +14,9 @@
  * Initial Controller/Express Configuration
  */
  import { Request, Response, NextFunction } from 'express';
- import jwt from 'jsonwebtoken';
 
  // Imports | 3rd Party
-import Exercise from '../Models/Exercise';
+ import Exercise from '../Models/Exercise';
  
  /**
   * Processing Functions
@@ -25,12 +24,12 @@ import Exercise from '../Models/Exercise';
  //- Process Home Request
  export async function GetExercises(req:Request, res:Response, next:NextFunction): Promise<Response>
  {
+     console.log(req.headers);
 
-     const userId = req.user.id;
-     console.log(userId);
     try {
-        const exercises = await Exercise.find({ $or: [{isDefault: true}, {userId: userId}]  });
-        return res.send(exercises);
+        const exercises = await Exercise.find();
+        console.log('Hello')
+        return res.send(req.headers);
     }
     catch (err) {
         return res.status(422).send(err.message);
@@ -41,6 +40,7 @@ import Exercise from '../Models/Exercise';
  {
     try {
 
+        console.log(req);
         const exercise = await Exercise.findById(req.params.id); //await Exercise.findById(req.params.id);
         if (!exercise)
         {
@@ -59,20 +59,16 @@ import Exercise from '../Models/Exercise';
  {
      //console.log(req.body);
      //console.log(req.body);
-     const { name, exerciseType, muscles, force, equipment } = req.body;
-     const userId = req.user.id;
-     const isDefault = false;
-     console.log(userId);
+     const { name, exerciseType, isDefault } = req.body;
+     //console.log(name);
      try {
         // Check if all Required Properties
-        if (!name || !exerciseType || !muscles || !force || !equipment)
+        if (!name || !exerciseType || !req.body.hasOwnProperty('isDefault') || isDefault === null)
         {
             return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
         }     
 
-        const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
-
-        console.log(newExercise);
+        const newExercise = new Exercise(req.body);
 
         await newExercise.save();
         res.send(newExercise);

@@ -26,7 +26,7 @@ import Exercise from '../Models/Exercise';
  export async function GetExercises(req:Request, res:Response, next:NextFunction): Promise<Response>
  {
 
-     const userId = req.user.id;
+     const { userId } = req.user;
      console.log(userId);
     try {
         const exercises = await Exercise.find({ $or: [{isDefault: true}, {userId: userId}]  });
