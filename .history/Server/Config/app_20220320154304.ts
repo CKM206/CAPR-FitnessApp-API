@@ -10,7 +10,6 @@
 // Require Models
  require('../Models/User');
 require('../Models/Exercise');
-require('../Models/Workout');
 
 // Import Express
 import express from 'express';          // Express!

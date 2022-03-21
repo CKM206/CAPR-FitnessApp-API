@@ -17,12 +17,12 @@ export interface IWorkoutExercise {
     endTime: Date,
     exercise: Types.ObjectId,
     sets: Types.Array<IWorkoutSet>,
-    restTime: number
+    restTime: numbe
 };
 
 // Create Interface for Workouts
 export interface IWorkout {
-    title: string,
+    name: string,
     note: string
     timeStarted: Date,
     timeFinished: Date,
@@ -68,7 +68,7 @@ const WorkoutExercise: Schema<IWorkoutExercise> = new Schema
 // Workout Schema for MongoDB 
 const WorkoutSchema: Schema<IWorkout> = new Schema
 ({
-    title: {
+    name: {
         type: String,
         required: true,
     },
