@@ -6,7 +6,7 @@ import User from './User';
 export interface IWorkoutSet {
     reps: number,
     weight: number,
-    duration: object,
+    duration: number,
     distance: number,
     restTime: number
 };
@@ -41,18 +41,10 @@ const WorkoutSet: Schema<IWorkoutSet> = new Schema
         type: Number
     },
     duration: {
-        hours:{
-            type: Number
-        },
-        minutes: {
-            type: Number
-        },
-        seconds: {
-            type: Number
-        }
+        type: Number
     },
     distance: {
-        type: Number
+        type: number
     },
     restTime: {
         type: Number

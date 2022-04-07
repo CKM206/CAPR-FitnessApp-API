@@ -29,8 +29,19 @@ exports.GetWorkouts = GetWorkouts;
 ;
 function NewWorkout(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(req.body);
-        res.send(req.body);
+        const { workoutInformation, exercises, timeFinished } = req.body;
+        const userId = req.user.id;
+        const { title, note, timeStarted } = workoutInformation;
+        const { sets } = exercises[0];
+        console.log(sets);
+        try {
+            const newWorkout = new Workout_1.default({ title, note, timeStarted, timeFinished, exercises, userId });
+            yield newWorkout.save();
+            res.send(req.body);
+        }
+        catch (err) {
+            return res.status(422).send(err.message);
+        }
     });
 }
 exports.NewWorkout = NewWorkout;

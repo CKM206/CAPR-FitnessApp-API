@@ -13,11 +13,8 @@
 /**
  * Initial Controller/Express Configuration
  */
-
-import { Request, Response, NextFunction } from 'express';
+ import { Request, Response, NextFunction } from 'express';
 import Workout from '../Models/Workout';
-import Exercise from '../Models/Exercise';
-
  
  // Imports | 3rd Party
  import jwt from 'jsonwebtoken';
@@ -45,32 +42,27 @@ import Exercise from '../Models/Exercise';
      //console.log(req.body);
      //console.log(req.body);
      
-     const { workoutInformation, exercises, timeFinished } = req.body;
-     const userId = req.user.id;
-
-     const { title, note, timeStarted } = workoutInformation;
-     const { sets } = exercises[0];
+     const { workoutInformation, exercises, sets } = req.body;
+     //  const userId = req.user.id;
+     //  const isDefault = false;
      console.log(sets);
-      try {
-
-         const newWorkout = new Workout({title, note, timeStarted, timeFinished, exercises, userId}) 
-   
-        //     //  // Check if all Required Properties
-        //     //  if (!name || !exerciseType || !muscles || !force || !equipment)
-        //     //  {
-        //     //          return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
-        //     //      }     
+     //  try {
+         //     // Check if all Required Properties
+         //     if (!name || !exerciseType || !muscles || !force || !equipment)
+         //     {
+             //         return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
+             //     }     
              
-        //     //      const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
+             //     const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
              
-        //           console.log(newWorkout);
+             //     console.log(newExercise);
              
-                  await newWorkout.save();
-                 res.send(req.body);
-
+             //     await newExercise.save();
+             //     res.send(newExercise);
+             res.send(req.body);
         
-    }
-    catch (err) {
-        return res.status(422).send(err.message);
-    }
+    // }
+    // catch (err) {
+    //     return res.status(422).send(err.message);
+    // }
  };

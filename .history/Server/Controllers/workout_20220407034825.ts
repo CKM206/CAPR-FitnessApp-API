@@ -45,27 +45,23 @@ import Exercise from '../Models/Exercise';
      //console.log(req.body);
      //console.log(req.body);
      
-     const { workoutInformation, exercises, timeFinished } = req.body;
-     const userId = req.user.id;
-
-     const { title, note, timeStarted } = workoutInformation;
-     const { sets } = exercises[0];
-     console.log(sets);
+     const { workoutInformation, exercises } = req.body;
+       const userId = req.user.id;
+     //console.log(exercises[0].sets);
       try {
-
-         const newWorkout = new Workout({title, note, timeStarted, timeFinished, exercises, userId}) 
-   
-        //     //  // Check if all Required Properties
-        //     //  if (!name || !exerciseType || !muscles || !force || !equipment)
-        //     //  {
-        //     //          return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
-        //     //      }     
+          const type = await Exercise.findById(exercises[0].exercise)
+          console.log(type)
+            //  // Check if all Required Properties
+            //  if (!name || !exerciseType || !muscles || !force || !equipment)
+            //  {
+            //          return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
+            //      }     
              
-        //     //      const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
+            //      const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
              
-        //           console.log(newWorkout);
+            //      console.log(newExercise);
              
-                  await newWorkout.save();
+            //      await newExercise.save();
                  res.send(req.body);
 
         

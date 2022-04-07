@@ -12,6 +12,17 @@ const WorkoutSet = new mongoose_1.Schema({
         type: Number
     },
     duration: {
+        hours: {
+            type: Number
+        },
+        minutes: {
+            type: Number
+        },
+        seconds: {
+            type: Number
+        }
+    },
+    distance: {
         type: Number
     },
     restTime: {
@@ -34,7 +45,7 @@ const WorkoutExercise = new mongoose_1.Schema({
     restTime: Number
 });
 const WorkoutSchema = new mongoose_1.Schema({
-    name: {
+    title: {
         type: String,
         required: true,
     },

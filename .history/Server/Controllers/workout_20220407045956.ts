@@ -47,13 +47,10 @@ import Exercise from '../Models/Exercise';
      
      const { workoutInformation, exercises, timeFinished } = req.body;
      const userId = req.user.id;
-
-     const { title, note, timeStarted } = workoutInformation;
-     const { sets } = exercises[0];
-     console.log(sets);
+     console.log(workoutInformation);
       try {
 
-         const newWorkout = new Workout({title, note, timeStarted, timeFinished, exercises, userId}) 
+        // const newWorkout = new Workout({title, note, timeStarted, timeFinished, exercises, userId}) 
    
         //     //  // Check if all Required Properties
         //     //  if (!name || !exerciseType || !muscles || !force || !equipment)
@@ -65,7 +62,7 @@ import Exercise from '../Models/Exercise';
              
         //           console.log(newWorkout);
              
-                  await newWorkout.save();
+        //          await newWorkout.save();
                  res.send(req.body);
 
         

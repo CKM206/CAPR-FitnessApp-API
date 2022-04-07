@@ -3,13 +3,13 @@ import Exercise  from './Exercise';
 import User from './User';
 
 // Create Interface for WorkoutSets
-export interface IWorkoutSet {
-    reps: number,
-    weight: number,
-    duration: object,
-    distance: number,
-    restTime: number
-};
+// export interface IWorkoutSet {
+//     reps: number,
+//     weight: number,
+//     duration: object,
+//     distance: number,
+//     restTime: number
+// };
 
 
 // Create Interface for WorkoutExercises
@@ -17,7 +17,7 @@ export interface IWorkoutExercise {
     startTime: Date,
     endTime: Date,
     exercise: Types.ObjectId,
-    sets: Types.Array<IWorkoutSet>,
+    sets: Types.Array<Object>,
     restTime: number
 };
 
@@ -32,32 +32,32 @@ export interface IWorkout {
 };
 
 // Workout Sets Schema for MongoDB
-const WorkoutSet: Schema<IWorkoutSet> = new Schema
-({
-    reps: {
-        type: Number
-    },
-    weight: {
-        type: Number
-    },
-    duration: {
-        hours:{
-            type: Number
-        },
-        minutes: {
-            type: Number
-        },
-        seconds: {
-            type: Number
-        }
-    },
-    distance: {
-        type: Number
-    },
-    restTime: {
-        type: Number
-    }
-})
+// const WorkoutSet: Schema<IWorkoutSet> = new Schema
+// ({
+//     reps: {
+//         type: Number
+//     },
+//     weight: {
+//         type: Number
+//     },
+//     duration: {
+//         hours:{
+//             type: Number
+//         },
+//         minutes: {
+//             type: Number
+//         },
+//         seconds: {
+//             type: Number
+//         }
+//     },
+//     distance: {
+//         type: Number
+//     },
+//     restTime: {
+//         type: Number
+//     }
+// })
 
 // Workout Exercise Schema for MongoDB 
 const WorkoutExercise: Schema<IWorkoutExercise> = new Schema
@@ -73,7 +73,32 @@ const WorkoutExercise: Schema<IWorkoutExercise> = new Schema
         ref: 'Exercise',
         required: true,
     },
-    sets: [WorkoutSet],
+    sets: [{
+        reps: {
+                    type: Number
+                },
+                weight: {
+                    type: Number
+                },
+                duration: {
+                    hours:{
+                        type: Number
+                    },
+                    minutes: {
+                        type: Number
+                    },
+                    seconds: {
+                        type: Number
+                    }
+                },
+                distance: {
+                    type: Number
+                },
+                restTime: {
+                    type: Number
+                }
+    }],
+    //sets: [WorkoutSet],
     restTime: Number
 });
 

@@ -45,27 +45,43 @@ import Exercise from '../Models/Exercise';
      //console.log(req.body);
      //console.log(req.body);
      
-     const { workoutInformation, exercises, timeFinished } = req.body;
+     const { workoutInformation, exercises } = req.body;
      const userId = req.user.id;
-
-     const { title, note, timeStarted } = workoutInformation;
-     const { sets } = exercises[0];
-     console.log(sets);
+     console.log(req.body);
       try {
 
-         const newWorkout = new Workout({title, note, timeStarted, timeFinished, exercises, userId}) 
-   
-        //     //  // Check if all Required Properties
-        //     //  if (!name || !exerciseType || !muscles || !force || !equipment)
-        //     //  {
-        //     //          return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
-        //     //      }     
+            //const newWorkout = new Workout({title: workoutInformation.title, note: })
+            //   switch(exerciseType) {
+            //       case 'Strength':
+            //         console.log(exerciseType)
+            //           break;
+
+            //       case 'Timed':
+            //         console.log(exerciseType)
+            //           break;
+
+            //       case 'Cardio':
+            //         console.log(exerciseType)
+            //           break;   
+
+            //       default:
+            //           break;           
+            //   }
+              
+
+ 
+          
+            //  // Check if all Required Properties
+            //  if (!name || !exerciseType || !muscles || !force || !equipment)
+            //  {
+            //          return res.status(422).send({ error: 'Important Exercise Properties Missing!' });
+            //      }     
              
-        //     //      const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
+            //      const newExercise = new Exercise({name, exerciseType, muscles, force, equipment, isDefault, userId: userId});
              
-        //           console.log(newWorkout);
+            //      console.log(newExercise);
              
-                  await newWorkout.save();
+            //      await newExercise.save();
                  res.send(req.body);
 
         

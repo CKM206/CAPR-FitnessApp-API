@@ -25,8 +25,8 @@ export interface IWorkoutExercise {
 export interface IWorkout {
     title: string,
     note: string
-    timeStarted: Date,
-    timeFinished: Date,
+    timeStarted: string,
+    timeFinished: string,
     exercises: Types.Array<IWorkoutExercise>,
     userId : Types.ObjectId
 };
@@ -88,10 +88,10 @@ const WorkoutSchema: Schema<IWorkout> = new Schema
         type: String
     },
     timeStarted: {
-        type: Date
+        type: String
     },
     timeFinished: {
-        type: Date
+        type: String
     },
     exercises: [WorkoutExercise],
     userId: {
